@@ -1,0 +1,32 @@
+//
+//  ImageIndicatorView.swift
+//  HeartSync
+//
+//  Created by Stephan Dowless on 1/2/24.
+//
+
+import SwiftUI
+
+struct CardImageIndicatorView: View {
+    let imageCount: Int
+    @Binding var currentIndex: Int
+    
+    private var imageIndicatorWidth: CGFloat {
+        return SizeConstants.cardWidth / CGFloat(imageCount) - 28
+    }
+    
+    var body: some View {
+        HStack {
+            ForEach(0 ..< imageCount, id: \.self) { index in
+                Capsule()
+                    .foregroundStyle(currentIndex == index ? .white : .gray)
+                    .frame(width: imageIndicatorWidth, height: 4)
+                    .padding(.top, 8)
+            }
+        }
+    }
+}
+
+#Preview {
+    CardImageIndicatorView(imageCount: 2, currentIndex: .constant(1))
+}
